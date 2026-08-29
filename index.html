@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Rewatch Reel — Movie Scene Quote Collector</title>
+<meta name="description" content="Save and browse your favorite movie scene quotes. Filter by mood, add your own, and relive cinematic moments."/>
+<link rel="stylesheet" href="/src/style.css"/>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+<div id="storage-banner" role="alert" aria-live="assertive"></div>
+<header class="app-header" role="banner">
+<h1 class="app-title">Rewatch Reel</h1>
+<p class="app-tagline">Your cinematic quote collection</p>
+</header>
+<div class="app-body">
+<div class="app-layout">
+<aside class="sidebar" aria-label="Add a new quote">
+<h2 class="sidebar-title">Add a Quote</h2>
+<form id="quote-form" novalidate aria-label="New quote entry form">
+<div class="form-group">
+<label for="quote-text">Quote <span class="required" aria-hidden="true">*</span></label>
+<textarea id="quote-text" name="quoteText" rows="3" maxlength="500" placeholder="&ldquo;Here&rsquo;s looking at you, kid.&rdquo;" autocomplete="off" required></textarea>
+<span id="quote-text-error" class="field-error" role="alert" aria-live="polite"></span>
+</div>
+<div class="form-group">
+<label for="movie-title">Movie Title <span class="required" aria-hidden="true">*</span></label>
+<input type="text" id="movie-title" name="movieTitle" maxlength="150" placeholder="Casablanca" autocomplete="off" required/>
+<span id="movie-title-error" class="field-error" role="alert" aria-live="polite"></span>
+</div>
+<div class="form-group">
+<label for="movie-year">Year <span class="required" aria-hidden="true">*</span></label>
+<input type="number" id="movie-year" name="movieYear" min="1888" max="2026" placeholder="1942" required/>
+<span id="movie-year-error" class="field-error" role="alert" aria-live="polite"></span>
+</div>
+<div class="form-group">
+<label for="character">Character <span style="color:var(--color-text-muted);font-weight:400">(optional)</span></label>
+<input type="text" id="character" name="character" maxlength="100" placeholder="Rick Blaine" autocomplete="off"/>
+</div>
+<div class="form-group">
+<label for="mood-tag">Mood <span class="required" aria-hidden="true">*</span></label>
+<select id="mood-tag" name="moodTag" required></select>
+<span id="mood-tag-error" class="field-error" role="alert" aria-live="polite"></span>
+</div>
+<button type="submit" class="btn btn--primary" id="add-quote-btn">Add Quote</button>
+</form>
+</aside>
+<main id="main-content" class="main-content" aria-label="Quote collection">
+<section aria-label="Filter quotes" class="filters">
+<div class="filter-group">
+<label for="filter-query">Search</label>
+<input type="search" id="filter-query" name="filterQuery" placeholder="Quote, movie, character…" autocomplete="off"/>
+</div>
+<div class="filter-group">
+<label for="filter-mood">Mood</label>
+<select id="filter-mood" name="filterMood"></select>
+</div>
+<button type="button" id="clear-filters" class="btn btn--secondary" aria-label="Clear all filters">Clear</button>
+<span id="quote-count" class="quote-count" aria-live="polite" aria-atomic="true">0 quotes</span>
+</section>
+<section aria-label="Saved quotes">
+<div id="empty-collection" class="empty-state" role="status" aria-label="No quotes saved yet">
+<span class="empty-state__icon" aria-hidden="true">🎬</span>
+<h2>Your reel is empty</h2>
+<p>Add your first movie quote using the form on the left.</p>
+</div>
+<div id="empty-filter" class="empty-state" hidden role="status" aria-label="No quotes match your filters">
+<span class="empty-state__icon" aria-hidden="true">🔍</span>
+<h2>No quotes found</h2>
+<p>No quotes match <strong id="filter-query-display"></strong>.</p>
+<button type="button" id="clear-filters-empty" class="btn btn--secondary" aria-label="Clear all filters to show all quotes">Clear filters</button>
+</div>
+<div id="quote-grid" class="quote-grid" hidden aria-label="Quote cards"></div>
+</section>
+</main>
+</div>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
