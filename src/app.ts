@@ -112,7 +112,12 @@ function render(): void {
     emptyCollection.hidden = true;
     emptyFilter.hidden = false;
     const queryDisplay = $("filter-query-display");
-    if (queryDisplay) queryDisplay.textContent = filterQuery || filterMood;
+    if (queryDisplay) {
+      const parts: string[] = [];
+      if (filterQuery) parts.push(`"${filterQuery}"`);
+      if (filterMood) parts.push(`mood "${filterMood}"`);
+      queryDisplay.textContent = parts.join(" and ");
+    }
     return;
   }
 
@@ -313,6 +318,11 @@ export function init(): void {
     case "empty":
       items = [];
       render();
+      break;
+    case "partial":
+      items = result.items;
+      render();
+      reportFailure(result.message);
       break;
     case "error":
       items = [];

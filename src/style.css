@@ -8,7 +8,7 @@
   --color-border-focus: #c9a84c;
   --color-text-primary: #e8e4d8;
   --color-text-secondary: #8a8fa8;
-  --color-text-muted: #505570;
+  --color-text-muted: #767ca0;
   --color-accent: #c9a84c;
   --color-accent-dim: #7a6430;
   --color-accent-glow: rgba(201,168,76,0.15);
@@ -31,8 +31,8 @@
   --mood-heartbreaking-bg: rgba(106,27,154,0.15);
   --mood-iconic: #b8860b;
   --mood-iconic-bg: rgba(184,134,11,0.15);
-  --mood-suspenseful: #01579b;
-  --mood-suspenseful-bg: rgba(1,87,155,0.15);
+  --mood-suspenseful: #4a90d9;
+  --mood-suspenseful-bg: rgba(74,144,217,0.15);
   --mood-romantic: #ad1457;
   --mood-romantic-bg: rgba(173,20,87,0.15);
   --space-xs: 0.25rem;
@@ -54,6 +54,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body { background: var(--color-bg); color: var(--color-text-primary); font-family: var(--font-ui); line-height: 1.6; min-height: 100vh; }
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.05; mix-blend-mode: overlay; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 3px 3px; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .skip-link { position: absolute; top: var(--space-sm); left: var(--space-sm); background: var(--color-accent); color: #000; font-weight: 600; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); transform: translateY(-120%); transition: transform var(--transition-fast); z-index: 1000; text-decoration: none; }

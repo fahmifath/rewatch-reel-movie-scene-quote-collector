@@ -5,6 +5,7 @@ const STORAGE_KEY = "rewatch-reel-quotes";
 export type LoadResult =
   | { status: "ok"; items: QuoteEntry[] }
   | { status: "empty" }
+  | { status: "partial"; items: QuoteEntry[]; message: string }
   | { status: "error"; message: string };
 
 export function load(): LoadResult {
@@ -18,13 +19,22 @@ export function load(): LoadResult {
     }
 
     const items: QuoteEntry[] = [];
+    let dropped = 0;
     for (const entry of parsed) {
       const normalized = normalizeEntry(entry);
       if (normalized !== null) items.push(normalized);
+      else dropped++;
     }
 
-    if (items.length === 0 && parsed.length > 0) {
+    if (dropped > 0 && items.length === 0) {
       return { status: "error", message: "Stored quotes were corrupt and could not be restored." };
+    }
+    if (dropped > 0) {
+      return {
+        status: "partial",
+        items,
+        message: `${dropped} saved quote${dropped === 1 ? "" : "s"} could not be restored due to corrupted data.`,
+      };
     }
 
     return items.length === 0 ? { status: "empty" } : { status: "ok", items };
